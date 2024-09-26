@@ -60,6 +60,9 @@ class AnimateDiffProcess:
         latent_power_last=1,
         latent_scale_last=32,
         request_id = '',
+        is_i2i_batch=False,
+        video_default=False,
+        prompt_scheduler=None,
     ):
         self.model = model
         self.enable = enable
@@ -92,9 +95,9 @@ class AnimateDiffProcess:
 
         # non-ui states
         self.request_id = request_id
-        self.video_default = False
-        self.is_i2i_batch = False
-        self.prompt_scheduler = None
+        self.video_default = video_default
+        self.is_i2i_batch = is_i2i_batch
+        self.prompt_scheduler = prompt_scheduler
 
 
     def get_list(self, is_img2img: bool):
@@ -179,6 +182,9 @@ class AnimateDiffProcess:
         cn_units = get_controlnet_units(p)
         min_batch_in_cn = -1
         for cn_unit in cn_units:
+            if not cn_unit.enabled: 
+                continue
+
             # batch path broadcast
             if (cn_unit.input_mode.name == 'SIMPLE' and cn_unit.image is None) or \
                (cn_unit.input_mode.name == 'BATCH' and not cn_unit.batch_images) or \
@@ -263,18 +269,22 @@ class AnimateDiffUiGroup:
     def get_model_list(self):
         model_dir = motion_module.get_model_dir()
         if not os.path.isdir(model_dir):
-            os.mkdir(model_dir)
+            os.makedirs(model_dir, exist_ok=True)
         def get_sd_rm_tag():
             if shared.sd_model.is_sdxl:
                 return ["sd1"]
             elif shared.sd_model.is_sd2:
-                return ["sd1, xl"]
+                return ["sd1", "xl"]
             elif shared.sd_model.is_sd1:
                 return ["xl"]
             else:
                 return []
-        return [f for f in os.listdir(model_dir) if f != ".gitkeep" and not any(tag in f for tag in get_sd_rm_tag())]
-
+        return sorted([
+            os.path.relpath(os.path.join(root, filename), model_dir)
+            for root, dirs, filenames in os.walk(model_dir)
+            for filename in filenames
+            if filename != ".gitkeep" and not any(tag in filename for tag in get_sd_rm_tag())
+        ])
 
     def refresh_models(self, *inputs):
         new_model_list = self.get_model_list()

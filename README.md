@@ -1,6 +1,6 @@
 # AnimateDiff for Stable Diffusion WebUI
 
-> It seems that WebUI v1.9.0 has some major mess-up. Please do not use this WebUI version. You can use either v1.8.0 or v1.9.3 (latest).
+> I have recently added a non-commercial [license](https://creativecommons.org/licenses/by-nc-sa/4.0/) to this extension. If you want to use this extension for commercial purpose, please contact me via email.
 
 This extension aim for integrating [AnimateDiff](https://github.com/guoyww/AnimateDiff/) with [CLI](https://github.com/s9roll7/animatediff-cli-prompt-travel) into [AUTOMATIC1111 Stable Diffusion WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui) with [ControlNet](https://github.com/Mikubill/sd-webui-controlnet), and form the most easy-to-use AI video toolkit. You can generate GIFs in exactly the same way as generating images after enabling this extension.
 
@@ -16,7 +16,7 @@ You might also be interested in another extension I created: [Segment Anything f
 
 
 ## Update
-- [v2.0.0-a](https://github.com/continue-revolution/sd-webui-animatediff/tree/v2.0.0-a) in `03/02/2023`: The whole extension has been reworked to make it easier to maintain.
+- [v2.0.0-a](https://github.com/continue-revolution/sd-webui-animatediff/tree/v2.0.0-a) in `03/02/2024`: The whole extension has been reworked to make it easier to maintain.
   - Prerequisite: WebUI >= 1.8.0 & ControlNet >=1.1.441 & PyTorch >= 2.0.0
   - New feature:
       - ControlNet inpaint / IP-Adapter prompt travel / SparseCtrl / ControlNet keyframe, see [ControlNet V2V](docs/features.md#controlnet-v2v)
@@ -24,6 +24,8 @@ You might also be interested in another extension I created: [Segment Anything f
       - FreeNoise, see [FreeNoise](docs/features.md#FreeNoise)
   - Minor: mm filter based on sd version (click refresh button if you switch between SD1.5 and SDXL) / display extension version in infotext
   - Breaking change: You must use Motion LoRA, Hotshot-XL, AnimateDiff V3 Motion Adapter from my [huggingface repo](https://huggingface.co/conrevo/AnimateDiff-A1111/tree/main).
+- [v2.0.1-a](https://github.com/continue-revolution/sd-webui-animatediff/tree/v2.0.1-a) in `07/12/2024`: Support [AnimateLCM](https://github.com/G-U-N/AnimateLCM) from MMLab@CUHK. See [here](docs/features.md#animatelcm) for instruction.
+
 
 ## Future Plan
 Although [OpenAI Sora](https://openai.com/sora) is far better at following complex text prompts and generating complex scenes, we believe that OpenAI will NOT open source Sora or any other other products they released recently. My current plan is to continue developing this extension until when an open-sourced video model is released, with strong ability to generate complex scenes, easy customization and good ecosystem like SD1.5.
@@ -43,7 +45,7 @@ I am maintaining a [huggingface repo](https://huggingface.co/conrevo/AnimateDiff
 
 ## Documentation
 - [How to Use](docs/how-to-use.md) -> [Preparation](docs/how-to-use.md#preparation) | [WebUI](docs/how-to-use.md#webui) | [API](docs/how-to-use.md#api) | [Parameters](docs/how-to-use.md#parameters)
-- [Features](docs/features.md) -> [Img2Vid](docs/features.md#img2vid) | [Prompt Travel](docs/features.md#prompt-travel) | [ControlNet V2V](docs/features.md#controlnet-v2v) | [ [Model Spec](docs/features.md#model-spec) -> [Motion LoRA](docs/features.md#motion-lora) | [V3](docs/features.md#v3) | [SDXL](docs/features.md#sdxl) ]
+- [Features](docs/features.md) -> [Img2Vid](docs/features.md#img2vid) | [Prompt Travel](docs/features.md#prompt-travel) | [ControlNet V2V](docs/features.md#controlnet-v2v) | [ [Model Spec](docs/features.md#model-spec) -> [Motion LoRA](docs/features.md#motion-lora) | [V3](docs/features.md#v3) | [SDXL](docs/features.md#sdxl) | [AnimateLCM](docs/features.md#animatelcm) ]
 - [Performance](docs/performance.md) -> [ [Optimizations](docs/performance.md#optimizations) -> [Attention](docs/performance.md#attention) | [FP8](docs/performance.md#fp8) | [LCM](docs/performance.md#lcm) ] | [VRAM](docs/performance.md#vram) | [Batch Size](docs/performance.md#batch-size)
 - [Demo](docs/demo.md) -> [Basic Usage](docs/demo.md#basic-usage) | [Motion LoRA](docs/demo.md#motion-lora) | [Prompt Travel](docs/demo.md#prompt-travel) | [AnimateDiff V3](docs/demo.md#animatediff-v3) | [AnimateDiff XL](docs/demo.md#animatediff-xl) | [ControlNet V2V](docs/demo.md#controlnet-v2v)
 
